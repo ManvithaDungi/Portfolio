@@ -58,16 +58,20 @@ function About() {
             <p><strong className="sub-heading">Certifications:</strong></p>
             <ul>
               <li>
-                Programming in Java
-                <a href="/certificates/certificate1.pdf" target="_blank" rel="noreferrer" className="glow-link">
-                  <p className="click-note">Click to view</p>
-                </a>
+                <span>Programming in Java</span>
+                <a href="/certificates/certificate1.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="glow-link"
+                  style={{ marginLeft: '10px' }}>Click to view</a>
               </li>
               <li>
-                Coursera ML by Andrew Ng
-                <a href="#" target="_blank" rel="noreferrer" className="glow-link">
-                  <p className="click-note">Click to view</p>
-                </a>
+                <span>Coursera ML by Andrew Ng</span>
+                <a href="#"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="glow-link"
+                  style={{ marginLeft: '10px' }}> Click to view</a>
               </li>
             </ul>
           </div>
