@@ -1,16 +1,15 @@
-// src/App.js
-import './App.css';
+// src/AppRoutes.js
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
+import App from './App'; // Home
 import About from './pages/About';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 
-function App() {
+export default function AppRoutes() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<App />} />
         <Route path="/about" element={<About />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/contact" element={<Contact />} />
@@ -18,5 +17,3 @@ function App() {
     </Router>
   );
 }
-
-export default App;
