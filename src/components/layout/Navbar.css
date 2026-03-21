@@ -93,13 +93,22 @@
   white-space: nowrap;
 }
 
+/* Mobile: 0-768px */
 @media (max-width: 768px) {
+  .nav-desktop {
+    display: none;
+  }
+
   .navbar-right {
     display: none;
   }
 
+  .hamburger {
+    display: flex;
+  }
+
 .hamburger {
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 4px;
   background: none;

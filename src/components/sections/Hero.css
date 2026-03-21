@@ -249,6 +249,8 @@
 }
 
 /* Responsive */
+
+/* Mobile: 0-768px */
 @media (max-width: 768px) {
   .hero {
     padding: var(--section-padding-y) var(--section-padding-x);
@@ -264,6 +266,25 @@
 
   .hero-divider {
     width: 120px;
+  }
+}
+
+/* Tablet & Desktop: 769px+ */
+@media (min-width: 769px) {
+  .hero {
+    padding: var(--section-padding-y) var(--section-padding-x);
+  }
+
+  .hero-content {
+    gap: 1.5rem;
+  }
+
+  .hero-socials {
+    gap: 2rem;
+  }
+
+  .hero-divider {
+    width: 160px;
   }
 }
 

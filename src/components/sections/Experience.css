@@ -176,6 +176,7 @@
   }
 }
 
+/* Mobile: 0-768px */
 @media (max-width: 768px) {
   .timeline {
     padding-left: 44px;
@@ -205,6 +206,39 @@
 
   .timeline-japanese {
     display: none;
+  }
+}
+
+/* Tablet & Desktop: 769px+ */
+@media (min-width: 769px) {
+  .timeline {
+    padding-left: 60px;
+    gap: 2rem;
+  }
+
+  .timeline-badge {
+    left: -46px;
+    width: 32px;
+    height: 32px;
+    font-size: var(--text-xs);
+  }
+
+  .entry-title {
+    font-size: var(--text-base);
+  }
+
+  .entry-description {
+    font-size: var(--text-sm);
+  }
+
+  .entry-meta {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .timeline-japanese {
+    display: block;
   }
 }
 

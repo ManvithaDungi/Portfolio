@@ -266,13 +266,7 @@
 
 /* ==== RESPONSIVE ==== */
 
-@media (min-width: 1100px) {
-  .about-rotated-label {
-    display: block;
-  }
-}
-
-@media (max-width: 1000px) {
+/* Mobile: 0-768px */
   .about-container {
     grid-template-columns: 1fr;
     gap: 1rem;
@@ -281,9 +275,45 @@
   .about-bio {
     padding: 1rem;
   }
+
+  .about-bio p {
+    line-height: 1.8;
+    font-size: var(--text-sm);
+  }
+
+  .skills-tags {
+    gap: 0.4rem;
+  }
+
+  .skill-tag {
+    padding: 3px 10px;
+    font-size: var(--text-xs);
+  }
 }
 
-@media (min-width: 1001px) {
+/* Tablet: 769px-1023px */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .about-bio {
+    padding: 1.5rem;
+  }
+
+  .skills-tags {
+    gap: 0.5rem;
+  }
+
+  .skill-tag {
+    padding: 4px 11px;
+    font-size: var(--text-xs);
+  }
+}
+
+/* Desktop: 1024px+ */
+@media (min-width: 1024px) {
   .about-container {
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
@@ -294,27 +324,9 @@
   }
 }
 
-@media (max-width: 768px) {
-  .about {
-    padding: var(--section-padding-y) var(--section-padding-x);
-  }
-
-  .about-bio p {
-    line-height: 1.8;
-    font-size: var(--text-sm);
-  }
-
-  .about-container {
-    gap: 1rem;
-  }
-
-  .skills-tags {
-    gap: 0.4rem;
-  }
-
-  .skill-tag {
-    padding: 3px 10px;
-    font-size: var(--text-xs);
+@media (min-width: 1100px) {
+  .about-rotated-label {
+    display: block;
   }
 }
 

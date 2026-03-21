@@ -163,6 +163,8 @@
 }
 
 /* Responsive */
+
+/* Mobile: 0-768px */
 @media (max-width: 768px) {
   .proficiency-container {
     gap: 1.5rem;
@@ -184,6 +186,31 @@
 
   .legend-item {
     font-size: var(--text-xs);
+  }
+}
+
+/* Tablet & Desktop: 769px+ */
+@media (min-width: 769px) {
+  .proficiency-container {
+    gap: 2rem;
+  }
+
+  .proficiency-heading {
+    font-size: var(--text-2xl);
+  }
+
+  .chart-wrapper {
+    height: 400px;
+    min-height: 280px;
+  }
+
+  .legend {
+    gap: 1.5rem;
+    padding: 1rem 0;
+  }
+
+  .legend-item {
+    font-size: var(--text-sm);
   }
 }
 
