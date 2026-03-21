@@ -331,20 +331,43 @@ This project is open source. Feel free to fork, modify, and adapt for your own p
 
 ## DEPLOYMENT
 
-### Vercel (Recommended)
+### Automatic Deployment (GitHub Actions)
+
+This repository includes automatic deployment via GitHub Actions. **Every push to the `main` branch triggers a build and deployment to GitHub Pages.**
+
+#### Setup GitHub Pages
+
+1. Go to repository **Settings > Pages**
+2. Set **Source** to "GitHub Actions"
+3. Push to main branch - deployment starts automatically
+
+#### Alternative Deployment Services
+
+For **Vercel** or **Netlify** deployment:
+1. Copy the corresponding workflow file from `.github/workflows/`
+2. Add required secrets to GitHub (see instructions in workflow files)
+3. Rename the file to remove `.example` extension
+4. Disable/remove `deploy.yml` if using an alternative
+
+### Manual Deployment
+
+#### Vercel
 ```bash
 npm install -g vercel
 vercel
 ```
 
-### Netlify
+#### Netlify
 ```bash
 npm install -g netlify-cli
 netlify deploy
 ```
 
-### GitHub Pages
-See [Vite documentation](https://vitejs.dev/guide/static-deploy.html) for detailed instructions.
+#### GitHub Pages
+```bash
+npm run build
+# Push 'dist' folder to gh-pages branch or configure Actions
+```
 
 ---
 

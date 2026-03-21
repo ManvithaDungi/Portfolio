@@ -1,0 +1,31 @@
+name: Deploy to Vercel (Alternative)
+
+# INSTRUCTIONS: To use this workflow instead of GitHub Pages:
+# 1. Add VERCEL_TOKEN and VERCEL_ORG_ID to GitHub Secrets
+#    - Go to Settings > Secrets and variables > Actions
+#    - Create VERCEL_TOKEN (get from Vercel account)
+#    - Create VERCEL_ORG_ID (found in Vercel dashboard)
+# 2. Rename this file from 'deploy-vercel.yml.example' to 'deploy-vercel.yml'
+# 3. Remove or disable 'deploy.yml' if using this instead
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Vercel
+        uses: vercel/action@main
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
