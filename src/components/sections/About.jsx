@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import SystemLabel from '../ui/SystemLabel';
 import './About.css';
 
 const About = () => {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handler = (e) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
   const panelReveal = {
     hidden: { opacity: 0, scaleY: 0.95 },
     visible: {
       opacity: 1,
       scaleY: 1,
       transition: {
-        duration: 0.4,
+        duration: prefersReducedMotion ? 0 : 0.4,
         ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
@@ -27,12 +38,12 @@ const About = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5,
+        duration: prefersReducedMotion ? 0 : 0.5,
         ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
@@ -41,8 +52,8 @@ const About = () => {
   const numberVariants = {
     hidden: { opacity: 0 },
     visible: {
-      opacity: 0.03,
-      transition: { duration: 1.2 },
+      opacity: 0.04,
+      transition: { duration: prefersReducedMotion ? 0 : 1.2 },
     },
   };
 
@@ -51,6 +62,36 @@ const About = () => {
     { label: 'Degree', value: 'B.Tech CSE' },
     { label: 'Year', value: '3rd Year' },
     { label: 'CGPA', value: '7.93/10' },
+  ];
+
+  const educationData = [
+    {
+      id: 'NODE_01',
+      unit: 'Amrita Vishwa Vidyapeetham',
+      sublabel: 'B.Tech — Computer Science & Engineering',
+      duration: '2023 – 2027',
+      metricLabel: 'SYNC RATE',
+      metricValue: '7.93 / 10',
+      status: 'ACTIVE',
+    },
+    {
+      id: 'NODE_02',
+      unit: 'Sri Venkateshwara Junior College',
+      sublabel: 'Board of Intermediate Education, Andhra Pradesh',
+      duration: '2021 – 2023',
+      metricLabel: 'OUTPUT',
+      metricValue: '92.1%',
+      status: 'COMPLETE',
+    },
+    {
+      id: 'NODE_03',
+      unit: 'Timpany School',
+      sublabel: 'ICSE — Andhra Pradesh',
+      duration: 'Until 2021',
+      metricLabel: 'OUTPUT',
+      metricValue: '96%',
+      status: 'COMPLETE',
+    },
   ];
 
   const skills = [
@@ -88,9 +129,6 @@ const About = () => {
       <motion.div
         className="about-container"
         variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '-100px' }}
       >
         {/* LEFT COLUMN — Bio Panel */}
         <motion.div variants={itemVariants}>
@@ -124,6 +162,32 @@ const About = () => {
                 <div key={item.label} className="bio-data-item">
                   <span className="bio-label">{item.label}</span>
                   <span className="bio-value">{item.value}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Education Log */}
+          <motion.div variants={itemVariants}>
+            <div className="edu-label">ACADEMIC LOG // SYNCHRONIZED</div>
+            <div className="edu-log">
+              {educationData.map((edu) => (
+                <div key={edu.id} className="edu-entry">
+                  <div className="edu-entry-header">
+                    <span className="edu-id">{edu.id}</span>
+                    <span className={`edu-status ${edu.status === 'ACTIVE' ? 'edu-status-active' : 'edu-status-complete'}`}>{edu.status}</span>
+                  </div>
+                  <div className="edu-entry-body">
+                    <div className="edu-unit">{edu.unit}</div>
+                    <div className="edu-sublabel">{edu.sublabel}</div>
+                    <div className="edu-meta">
+                      <span className="edu-duration">{edu.duration}</span>
+                      <span className="edu-metric">
+                        <span className="edu-metric-label">{edu.metricLabel}:</span>
+                        <span className="edu-metric-value">{edu.metricValue}</span>
+                      </span>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>

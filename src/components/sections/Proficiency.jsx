@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import SystemLabel from '../ui/SystemLabel';
 import RadarChart from '../ui/RadarChart';
@@ -6,6 +6,17 @@ import MangaPanel from '../ui/MangaPanel';
 import './Proficiency.css';
 
 const Proficiency = () => {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handler = (e) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
   const proficiencyData = [
     { name: 'Frontend', value: 82 },
     { name: 'Backend', value: 70 },
@@ -15,35 +26,25 @@ const Proficiency = () => {
     { name: 'System', value: 55 },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      },
-    },
-  };
-
   const itemVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
+    hidden: { opacity: 0, scale: prefersReducedMotion ? 1 : 0.8 },
     visible: {
       opacity: 1,
       scale: 1,
       transition: {
-        duration: 0.45,
+        duration: prefersReducedMotion ? 0 : 0.45,
         ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
   };
 
   const panelReveal = {
-    hidden: { opacity: 0, scaleY: 0.95 },
+    hidden: { opacity: 0, scaleY: prefersReducedMotion ? 1 : 0.95 },
     visible: {
       opacity: 1,
       scaleY: 1,
       transition: {
-        duration: 0.4,
+        duration: prefersReducedMotion ? 0 : 0.4,
         ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
@@ -51,7 +52,7 @@ const Proficiency = () => {
 
   const numberVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 0.03, transition: { duration: 1.2 } },
+    visible: { opacity: 0.04, transition: { duration: prefersReducedMotion ? 0 : 1.2 } },
   };
 
   return (

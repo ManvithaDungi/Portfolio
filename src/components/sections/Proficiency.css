@@ -16,9 +16,9 @@
 .proficiency-section-number {
   position: absolute;
   font-family: var(--font-display);
-  font-size: 20vw;
+  font-size: clamp(8rem, 20vw, 18rem);
   color: var(--color-white);
-  opacity: 0.03;
+  opacity: 0.04;
   top: 50%;
   transform: translateY(-50%);
   left: -2vw;
@@ -112,8 +112,8 @@
 .chart-wrapper::before {
   content: '';
   position: absolute;
-  width: 400px;
-  height: 400px;
+  width: min(400px, 90vw);
+  height: min(400px, 90vw);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -142,6 +142,7 @@
   gap: 0.5rem;
   font-family: var(--font-mono);
   font-size: var(--text-xs);
+  min-width: 100px;
 }
 
 .legend-name {
@@ -164,7 +165,43 @@
 
 /* Responsive */
 
-/* Mobile: 0-768px */
+/* True Mobile: 0-480px */
+@media (max-width: 480px) {
+  .proficiency-heading {
+    font-size: var(--text-lg);
+  }
+
+  .proficiency-container {
+    gap: 1.2rem;
+  }
+
+  .chart-wrapper {
+    height: 260px;
+    min-height: 220px;
+  }
+
+  .chart-wrapper::before {
+    width: min(280px, 85vw);
+    height: min(280px, 85vw);
+  }
+
+  .sync-rate-badge {
+    top: 6px;
+    right: 6px;
+    transform: scale(0.85);
+    transform-origin: top right;
+  }
+
+  .legend {
+    gap: 0.75rem;
+  }
+
+  .legend-item {
+    font-size: var(--text-xs);
+  }
+}
+
+/* Mobile: 481px-768px */
 @media (max-width: 768px) {
   .proficiency-container {
     gap: 1.5rem;
@@ -189,8 +226,8 @@
   }
 }
 
-/* Tablet & Desktop: 769px+ */
-@media (min-width: 769px) {
+/* Tablet & Desktop: 768px+ */
+@media (min-width: 768px) {
   .proficiency-container {
     gap: 2rem;
   }
@@ -214,7 +251,7 @@
   }
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 900px) {
   .proficiency-rotated-label {
     display: block;
   }

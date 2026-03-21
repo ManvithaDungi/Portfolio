@@ -14,9 +14,9 @@
 .experience-section-number {
   position: absolute;
   font-family: var(--font-display);
-  font-size: 20vw;
+  font-size: clamp(8rem, 20vw, 18rem);
   color: var(--color-white);
-  opacity: 0.03;
+  opacity: 0.04;
   top: 50%;
   transform: translateY(-50%);
   right: -2vw;
@@ -61,6 +61,7 @@
   gap: 2rem;
   position: relative;
   padding-left: 60px;
+  --timeline-offset: 60px;
 }
 
 /* Vertical timeline line */
@@ -69,9 +70,11 @@
   position: absolute;
   left: 15px;
   top: 0;
-  bottom: 0;
+  bottom: auto;
+  height: calc(100% - 32px);
   width: 1px;
-  background-color: var(--color-blue-dim);
+  background-color: var(--color-blue);
+  opacity: 0.2;
 }
 
 /* Vertical Japanese text "経験" along the timeline */
@@ -90,6 +93,12 @@
   user-select: none;
 }
 
+@media (max-width: 600px) {
+  .timeline-japanese {
+    display: none;
+  }
+}
+
 .timeline-entry {
   display: flex;
   gap: 1.2rem;
@@ -100,23 +109,23 @@
 /* Manga badge dot — numbered, red, brutal, no border-radius */
 .timeline-badge {
   position: absolute;
-  left: -46px;
+  left: calc(-1 * var(--timeline-offset) + 14px);
   top: 0;
   width: 32px;
   height: 32px;
   background-color: var(--color-manga-red);
-  border: 2px solid var(--color-white);
+  border: 2px solid #ffffff;
   border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: var(--color-bg);
+  color: #ffffff;
   font-weight: 700;
   z-index: 1;
   flex-shrink: 0;
-  box-shadow: 2px 2px 0px var(--color-white);
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
 }
 
 .entry-content {
@@ -146,19 +155,19 @@
 .entry-org {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: var(--color-cyan);
+  color: var(--color-blue);
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  text-shadow: var(--text-glow-cyan);
+  text-shadow: none;
 }
 
 .entry-date {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: var(--color-cyan);
+  color: var(--color-blue);
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  text-shadow: var(--text-glow-cyan);
+  text-shadow: none;
 }
 
 .entry-description {
@@ -169,8 +178,12 @@
   line-height: 1.8;
 }
 
+.timeline-entry:last-child {
+  padding-bottom: 0;
+}
+
 /* Responsive */
-@media (min-width: 1100px) {
+@media (min-width: 900px) {
   .experience-rotated-label {
     display: block;
   }
@@ -181,10 +194,10 @@
   .timeline {
     padding-left: 44px;
     gap: 1.5rem;
+    --timeline-offset: 44px;
   }
 
   .timeline-badge {
-    left: -30px;
     width: 26px;
     height: 26px;
     font-size: 9px;
@@ -209,15 +222,15 @@
   }
 }
 
-/* Tablet & Desktop: 769px+ */
-@media (min-width: 769px) {
+/* Tablet & Desktop: 768px+ */
+@media (min-width: 768px) {
   .timeline {
     padding-left: 60px;
     gap: 2rem;
+    --timeline-offset: 60px;
   }
 
   .timeline-badge {
-    left: -46px;
     width: 32px;
     height: 32px;
     font-size: var(--text-xs);
@@ -244,7 +257,7 @@
 
 /* Reduce motion */
 @media (prefers-reduced-motion: reduce) {
-  .timeline-entry {
-    transition: none;
+  .timeline-badge {
+    box-shadow: none;
   }
 }

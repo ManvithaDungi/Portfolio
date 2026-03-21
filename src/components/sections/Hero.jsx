@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import SystemLabel from '../ui/SystemLabel';
@@ -7,6 +7,17 @@ import MangaPanel from '../ui/MangaPanel';
 import './Hero.css';
 
 const Hero = () => {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handler = (e) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -19,12 +30,12 @@ const Hero = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 24 },
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 24 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5,
+        duration: prefersReducedMotion ? 0 : 0.5,
         ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
@@ -32,7 +43,7 @@ const Hero = () => {
 
   const numberVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 0.03, transition: { duration: 1.2 } },
+    visible: { opacity: 0.04, transition: { duration: prefersReducedMotion ? 0 : 1.2 } },
   };
 
   const socialLinks = [

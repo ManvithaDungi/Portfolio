@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import SystemLabel from '../ui/SystemLabel';
 import './Experience.css';
 
 const Experience = () => {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handler = (e) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
   const experiences = [
     {
       id: 1,
@@ -25,12 +36,12 @@ const Experience = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.45,
+        duration: prefersReducedMotion ? 0 : 0.45,
         ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
@@ -38,7 +49,7 @@ const Experience = () => {
 
   const numberVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 0.03, transition: { duration: 1.2 } },
+    visible: { opacity: 0.04, transition: { duration: prefersReducedMotion ? 0 : 1.2 } },
   };
 
   return (

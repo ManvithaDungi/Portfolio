@@ -21,7 +21,7 @@
 /* NERV Logo - Hexagon */
 .nerv-logo {
   position: absolute;
-  top: 30px;
+  top: clamp(16px, 3vh, 30px);
   left: 50%;
   transform: translateX(-50%);
   width: 80px;
@@ -42,8 +42,13 @@
   flex-direction: column;
   gap: 0.4em;
   font-family: var(--font-mono);
-  white-space: nowrap;
-  padding-left: 40px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-width: 100%;
+  overflow-x: hidden;
+  max-height: calc(100vh - 180px);
+  overflow-y: auto;
+  padding-left: var(--section-padding-x, 40px);
   margin-bottom: 60px;
 }
 
@@ -71,7 +76,7 @@
 /* Status Indicator */
 .boot-status {
   position: absolute;
-  bottom: 60px;
+  bottom: clamp(20px, 5vh, 60px);
   left: 40px;
   display: flex;
   align-items: center;
@@ -88,6 +93,7 @@
   border-radius: 50%;
   background-color: var(--color-cyan);
   box-shadow: var(--glow-cyan);
+  animation: pulse-slow 2s ease-in-out infinite;
 }
 
 .status-text {
@@ -120,6 +126,16 @@
   }
   50% {
     opacity: 0.5;
+  }
+}
+
+/* Very short landscape screens */
+@media (max-height: 500px) {
+  .nerv-logo {
+    display: none;
+  }
+  .boot-output {
+    margin-bottom: 30px;
   }
 }
 

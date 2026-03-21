@@ -1,13 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import './Boot.css';
 
 const Boot = ({ onComplete = () => {} }) => {
   const [displayedLines, setDisplayedLines] = useState([]);
-  const [isComplete, setIsComplete] = useState(false);
-  const [shouldFadeOut, setShouldFadeOut] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
+  const prefersReducedRef = useRef(false);
+  const completedRef = useRef(false);
 
-  // Boot sequence typewriter effect
+  // Detect reduced motion preference on mount
+  useEffect(() => {
+    prefersReducedRef.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }, []);
+
+  // Main boot sequence loop
   useEffect(() => {
     const bootLines = [
       'NERV MAGI SYSTEM // PORTFOLIO_OS v2.0.26',
@@ -21,36 +27,52 @@ const Boot = ({ onComplete = () => {} }) => {
       'LAUNCHING INTERFACE...',
     ];
 
+    // Skip animation if reduced motion is preferred
+    if (prefersReducedRef.current) {
+      setDisplayedLines(bootLines);
+      setTimeout(() => {
+        setFadeOut(true);
+      }, 100);
+      return;
+    }
+
+    // Typewriter effect: add one line every 120ms
     if (displayedLines.length < bootLines.length) {
       const timer = setTimeout(() => {
         setDisplayedLines((prev) => [...prev, bootLines[prev.length]]);
-      }, 350); // 300-400ms delay between lines
+      }, 120);
 
       return () => clearTimeout(timer);
-    } else if (displayedLines.length === bootLines.length && !isComplete) {
-      // All lines displayed, wait then mark complete
+    }
+
+    // All lines displayed - fade out after 300ms pause
+    if (displayedLines.length === bootLines.length && !fadeOut) {
       const timer = setTimeout(() => {
-        setIsComplete(true);
-      }, 600); // 600ms pause after last line
+        setFadeOut(true);
+      }, 300);
 
       return () => clearTimeout(timer);
     }
-  }, [displayedLines.length, isComplete]);
+  }, [displayedLines, fadeOut]);
 
-  // Fade out and unmount
+  // Handle fade out completion
   useEffect(() => {
-    if (isComplete && !shouldFadeOut) {
-      setShouldFadeOut(true);
-      setTimeout(() => onComplete(), 500);
+    if (fadeOut && !completedRef.current) {
+      completedRef.current = true;
+      const timer = setTimeout(() => {
+        onComplete();
+      }, prefersReducedRef.current ? 0 : 300);
+
+      return () => clearTimeout(timer);
     }
-  }, [isComplete, shouldFadeOut, onComplete]);
+  }, [fadeOut, onComplete]);
 
   return (
     <motion.div
       className="boot-container"
       initial={{ opacity: 1 }}
-      animate={shouldFadeOut ? { opacity: 0 } : { opacity: 1 }}
-      transition={{ duration: 0.5, ease: 'easeInOut' }}
+      animate={{ opacity: fadeOut ? 0 : 1 }}
+      transition={{ duration: prefersReducedRef.current ? 0 : 0.3, ease: 'easeInOut' }}
     >
       {/* NERV Hexagon Logo */}
       <div className="nerv-logo">
@@ -77,10 +99,10 @@ const Boot = ({ onComplete = () => {} }) => {
         {displayedLines.map((line, index) => (
           <div
             key={index}
-            className={`boot-line ${index === displayedLines.length - 1 && !isComplete ? 'active' : ''}`}
+            className={`boot-line ${index === displayedLines.length - 1 && !fadeOut ? 'active' : ''}`}
           >
             {line}
-            {index === displayedLines.length - 1 && !isComplete && <span className="cursor">▮</span>}
+            {index === displayedLines.length - 1 && !fadeOut && <span className="cursor">▮</span>}
           </div>
         ))}
       </div>

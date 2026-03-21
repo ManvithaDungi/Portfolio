@@ -16,9 +16,9 @@
 .projects-section-number {
   position: absolute;
   font-family: var(--font-display);
-  font-size: 20vw;
+  font-size: clamp(8rem, 20vw, 18rem);
   color: var(--color-white);
-  opacity: 0.03;
+  opacity: 0.04;
   top: 50%;
   transform: translateY(-50%);
   right: -2vw;
@@ -89,9 +89,10 @@
 }
 
 .projects-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 1rem;
+  align-items: stretch;
 }
 
 .project-row {
@@ -106,9 +107,11 @@
   position: relative;
 }
 
-.project-row:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: var(--shadow-brutal);
+@media (hover: hover) {
+  .project-row:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: var(--shadow-brutal);
+  }
 }
 
 /* Manga Chapter Header Bar */
@@ -124,7 +127,7 @@
 .project-id {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: var(--color-bg);
+  color: var(--color-white);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 700;
@@ -171,9 +174,42 @@
 .project-description {
   font-family: var(--font-mono);
   font-size: var(--text-sm);
-  color: #2A2A2A;
+  color: var(--color-muted);
   margin: 0;
   line-height: 1.6;
+  min-width: 0;
+  word-break: break-word;
+}
+
+/* Project Features List */
+.project-features {
+  display: none;
+  flex-direction: column;
+  gap: 0.3rem;
+  list-style: none;
+  margin: 0.5rem 0 0 0;
+  padding: 0;
+}
+
+.project-feature-item {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: baseline;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.feature-bullet {
+  color: var(--color-manga-red);
+  flex-shrink: 0;
+}
+
+.feature-text {
+  color: var(--color-muted);
+  line-height: 1.5;
+  min-width: 0;
+  word-break: break-word;
 }
 
 .project-stack {
@@ -195,6 +231,8 @@
 .stack-items {
   color: var(--color-blue);
   letter-spacing: 0.05em;
+  min-width: 0;
+  word-break: break-word;
 }
 
 .project-links {
@@ -207,7 +245,7 @@
 .project-link {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: #0A0A0A;
+  color: var(--color-white);
   text-decoration: none;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -221,6 +259,7 @@
 /* Responsive */
 
 /* Mobile: 0-768px */
+@media (max-width: 768px) {
   .project-content {
     padding: 16px 20px;
   }
@@ -235,6 +274,8 @@
 
   .project-stack {
     flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 0.4rem;
   }
 
   .project-links {
@@ -246,8 +287,8 @@
   }
 }
 
-/* Tablet & Desktop: 769px+ */
-@media (min-width: 769px) {
+/* Tablet & Desktop: 768px+ */
+@media (min-width: 768px) {
   .project-content {
     padding: 20px 24px;
   }
@@ -265,9 +306,25 @@
   }
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 900px) {
   .projects-rotated-label {
     display: block;
+  }
+}
+
+/* Desktop: 1024px+ — 2-column grid */
+@media (min-width: 1024px) {
+  .projects-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .project-row:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  .project-features {
+    display: flex;
   }
 }
 

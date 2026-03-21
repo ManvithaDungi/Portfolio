@@ -4,6 +4,7 @@
 
 .hero {
   min-height: 100vh;
+  min-height: 100dvh;        /* accounts for mobile browser toolbars */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,13 +43,22 @@
   z-index: 1;
 }
 
+@media (max-width: 480px) {
+  .hero::after {
+    width: 40px;
+    height: 40px;
+    top: 16px;
+    left: 16px;
+  }
+}
+
 /* Section number bg text */
 .hero-section-number {
   position: absolute;
   font-family: var(--font-display);
-  font-size: 20vw;
+  font-size: clamp(8rem, 20vw, 18rem);
   color: var(--color-white);
-  opacity: 0.03;
+  opacity: 0.04;
   top: 50%;
   transform: translateY(-50%);
   left: -2vw;
@@ -95,7 +105,7 @@
 
 .hero-heading-line-2 {
   font-family: var(--font-display);
-  font-size: var(--text-hero);
+  font-size: clamp(2rem, 10vw, var(--text-hero));
   color: var(--color-white);
   letter-spacing: 0.02em;
   font-weight: 700;
@@ -113,6 +123,16 @@
   text-transform: uppercase;
   margin-top: 0.7rem;
   font-weight: 400;
+  word-break: break-word;
+  white-space: normal;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .hero-subline {
+    font-size: var(--text-xs);
+    letter-spacing: 0.1em;
+  }
 }
 
 /* Divider */
@@ -169,13 +189,15 @@
   transition: all 150ms ease;
 }
 
-.social-link:hover .social-icon {
-  color: var(--color-blue);
-  filter: none;
-}
+@media (hover: hover) {
+  .social-link:hover .social-icon {
+    color: var(--color-blue);
+    filter: none;
+  }
 
-.social-link:hover .social-label {
-  color: var(--color-blue);
+  .social-link:hover .social-label {
+    color: var(--color-blue);
+  }
 }
 
 /* Scroll Indicator */
@@ -198,12 +220,27 @@
   }
 }
 
+@media (max-height: 700px) {
+  .scroll-indicator {
+    display: none;
+  }
+}
+
 /* Manga Accent Badges */
 .hero-accent-badge {
   position: absolute;
   top: 80px;
   right: 40px;
   z-index: 10;
+}
+
+@media (max-width: 480px) {
+  .hero-accent-badge {
+    top: 16px;
+    right: 16px;
+    transform: scale(0.75);
+    transform-origin: top right;
+  }
 }
 
 .accent-badge-content {
@@ -216,7 +253,7 @@
 
 .accent-kanji {
   font-family: var(--font-japanese);
-  font-size: 32px;
+  font-size: clamp(20px, 3vw, 32px);
   color: var(--color-panel-cream);
   font-weight: 700;
 }
@@ -233,7 +270,7 @@
 /* Floating Bottom-Left Panel */
 .hero-floating-panel {
   position: absolute;
-  bottom: 120px;
+  bottom: clamp(60px, 10vh, 120px);
   left: var(--section-padding-x);
   z-index: 10;
 }
@@ -245,7 +282,18 @@
   letter-spacing: 0.05em;
   text-transform: uppercase;
   text-shadow: var(--text-glow-cyan);
-  white-space: nowrap;
+  white-space: normal;
+}
+
+@media (max-width: 480px) {
+  .hero-floating-panel {
+    display: none;
+  }
+
+  .floating-panel-content {
+    white-space: normal;
+    font-size: 10px;
+  }
 }
 
 /* Responsive */
@@ -253,7 +301,7 @@
 /* Mobile: 0-768px */
 @media (max-width: 768px) {
   .hero {
-    padding: var(--section-padding-y) var(--section-padding-x);
+    padding: var(--section-padding-y) 1rem;
   }
 
   .hero-content {
@@ -269,8 +317,8 @@
   }
 }
 
-/* Tablet & Desktop: 769px+ */
-@media (min-width: 769px) {
+/* Tablet & Desktop: 768px+ */
+@media (min-width: 768px) {
   .hero {
     padding: var(--section-padding-y) var(--section-padding-x);
   }
