@@ -283,6 +283,17 @@
   }
 }
 
+@media (min-width: 1001px) {
+  .about-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .about-bio {
+    padding: 2rem;
+  }
+}
+
 @media (max-width: 768px) {
   .about {
     padding: var(--section-padding-y) var(--section-padding-x);
