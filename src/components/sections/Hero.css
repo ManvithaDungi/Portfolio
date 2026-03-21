@@ -1,0 +1,275 @@
+/* ============================================================================
+   HERO SECTION STYLES
+   ============================================================================ */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg);
+  padding: var(--section-padding-y) var(--section-padding-x);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hexagon grid background */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Corner accent - top left - UPGRADED */
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  top: 40px;
+  left: 40px;
+  border-top: 3px solid var(--color-blue);
+  border-left: 3px solid var(--color-blue);
+  box-shadow: var(--glow-blue);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Section number bg text */
+.hero-section-number {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: 20vw;
+  color: var(--color-white);
+  opacity: 0.03;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -2vw;
+  pointer-events: none;
+  z-index: 0;
+  line-height: 1;
+  user-select: none;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: var(--max-width);
+  gap: 1.2rem;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+/* System Label - removed (using global style) */
+
+/* Hero Heading */
+.hero-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-heading-line-1 {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+  font-weight: 400;
+  text-shadow: none;
+}
+
+.hero-heading-line-2 {
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  color: var(--color-white);
+  letter-spacing: 0.02em;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.1;
+  text-shadow: var(--shadow-brutal-blue);
+}
+
+/* Subline */
+.hero-subline {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-blue);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 0.7rem;
+  font-weight: 400;
+}
+
+/* Divider */
+.hero-divider {
+  width: 160px;
+  height: 1px;
+  background: var(--border-bright);
+  margin: 0.8rem 0;
+}
+
+/* Status Text */
+.hero-status {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0.5rem 0;
+}
+
+/* Social Links */
+.hero-socials {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.social-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-muted);
+  transition: all 150ms ease;
+  text-decoration: none;
+}
+
+.social-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--color-muted);
+  transition: all 150ms ease;
+}
+
+.social-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 150ms ease;
+}
+
+.social-link:hover .social-icon {
+  color: var(--color-blue);
+  filter: none;
+}
+
+.social-link:hover .social-label {
+  color: var(--color-blue);
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 2rem;
+  animation: pulse-slow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Manga Accent Badges */
+.hero-accent-badge {
+  position: absolute;
+  top: 80px;
+  right: 40px;
+  z-index: 10;
+}
+
+.accent-badge-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.accent-kanji {
+  font-family: var(--font-japanese);
+  font-size: 32px;
+  color: var(--color-panel-cream);
+  font-weight: 700;
+}
+
+.accent-text {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-panel-cream);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* Floating Bottom-Left Panel */
+.hero-floating-panel {
+  position: absolute;
+  bottom: 120px;
+  left: var(--section-padding-x);
+  z-index: 10;
+}
+
+.floating-panel-content {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-cyan);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-shadow: var(--text-glow-cyan);
+  white-space: nowrap;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--section-padding-y) var(--section-padding-x);
+  }
+
+  .hero-content {
+    gap: 1rem;
+  }
+
+  .hero-socials {
+    gap: 1.5rem;
+  }
+
+  .hero-divider {
+    width: 120px;
+  }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-indicator {
+    animation: none;
+  }
+}

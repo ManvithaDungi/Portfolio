@@ -1,0 +1,403 @@
+/* ============================================================================
+   NERV MAGI SYSTEM // DESIGN TOKENS - DUAL PALETTE
+   Neo-brutalist minimal + Neon Genesis Evangelion aesthetic
+   Light: "NERV PAPER" | Dark: "NERV CORE"
+   ============================================================================ */
+
+/* ====== LIGHT MODE — "NERV PAPER" ====== */
+:root {
+  /* Backgrounds */
+  --color-bg:       #F0EDE6;   /* aged manga paper */
+  --color-bg-2:     #E8E4DC;   /* slightly darker paper */
+  --color-bg-3:     #FFFFFF;   /* pure white panels */
+  --color-bg-4:     #D6E4F0;   /* cold blue tint panel */
+
+  /* Text */
+  --color-white:    #0A0A0F;   /* near black — primary text */
+  --color-muted:    #4A5568;   /* mid gray — secondary text */
+  --color-faint:    #8A9BB0;   /* lightest text, labels */
+
+  /* Anime / NGE accents */
+  --color-blue:     #0047CC;   /* NERV electric blue */
+  --color-cyan:     #007FA3;   /* muted teal — readable on light */
+  --color-red:      #CC1200;   /* NGE danger red */
+  --color-warning:  #C45000;   /* NERV orange */
+  --color-green:    #006B3C;   /* system nominal green */
+
+  /* Brutalist */
+  --color-border:   #0A0A0F;   /* hard black borders */
+  --color-black:    #0A0A0F;
+
+  /* Shadows — hard offset, no blur */
+  --shadow-brutal:      4px 4px 0px #0A0A0F;
+  --shadow-brutal-blue: 4px 4px 0px #0047CC;
+  --shadow-brutal-red:  4px 4px 0px #CC1200;
+
+  /* Borders */
+  --border:         2px solid #0A0A0F;
+  --border-thin:    1px solid rgba(0,0,0,0.15);
+  --border-blue:    2px solid #0047CC;
+  --border-red:     2px solid #CC1200;
+
+  /* Glows — subtle on light bg */
+  --glow-blue:      0 0 8px rgba(0, 71, 204, 0.3);
+  --glow-red:       0 0 8px rgba(204, 18, 0, 0.3);
+  --text-glow-blue: 0 0 4px rgba(0, 71, 204, 0.4);
+  --text-glow-cyan: 0 0 4px rgba(0, 127, 163, 0.4);
+
+  /* Screentone / texture */
+  --screentone:     rgba(0, 0, 0, 0.035);
+
+  /* Legacy aliases for compatibility */
+  --color-panel-light: #FFFFFF;
+  --color-panel-cream: #F0EDE6;
+  --color-panel-border: #0A0A0F;
+  --color-manga-red: #CC1200;
+  --border-bright: 1px solid rgba(0, 71, 204, 0.6);
+  --border-cyan: 1px solid #007FA3;
+  --color-blue-dim: rgba(0, 71, 204, 0.2);
+
+  /* FONTS */
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-japanese: 'Zen Antique Soft', serif;
+
+  /* SPACING */
+  --section-padding-x: clamp(20px, 5vw, 100px);
+  --section-padding-y: clamp(40px, 6vw, 80px);
+  --max-width: 1100px;
+
+  /* TYPOGRAPHY SCALE - clamp(mobile, ideal, desktop) */
+  --text-xs: clamp(11px, 1.3vw, 13px);
+  --text-sm: clamp(13px, 1.6vw, 15px);
+  --text-base: clamp(15px, 1.8vw, 17px);
+  --text-lg: clamp(18px, 2.2vw, 22px);
+  --text-xl: clamp(26px, 3.4vw, 32px);
+  --text-2xl: clamp(32px, 4.4vw, 48px);
+  --text-3xl: clamp(48px, 6.6vw, 72px);
+  --text-hero: clamp(60px, 10vw, 120px);
+}
+
+/* ====== DARK MODE — "NERV CORE" ====== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Backgrounds */
+    --color-bg:       #04060D;   /* near black, cold blue undertone */
+    --color-bg-2:     #080D18;   /* section bg */
+    --color-bg-3:     #0C1220;   /* card / panel bg */
+    --color-bg-4:     #111827;   /* elevated surface */
+
+    /* Text */
+    --color-white:    #D8E8FF;   /* off white, cold blue tint */
+    --color-muted:    #5A7899;   /* readable mid tone */
+    --color-faint:    #2E4560;   /* dimmest text, labels */
+
+    /* Anime / NGE accents */
+    --color-blue:     #1A7FFF;   /* electric blue */
+    --color-cyan:     #00EEFF;   /* neon cyan — use for highlights */
+    --color-red:      #FF1A1A;   /* danger red */
+    --color-warning:  #FF6600;   /* NERV orange */
+    --color-green:    #00FF88;   /* system nominal */
+
+    /* Brutalist */
+    --color-border:   #1A7FFF;   /* blue borders on dark */
+    --color-black:    #000000;
+
+    /* Shadows — hard offset with color */
+    --shadow-brutal:      4px 4px 0px #000000;
+    --shadow-brutal-blue: 4px 4px 0px #1A7FFF;
+    --shadow-brutal-red:  4px 4px 0px #FF1A1A;
+
+    /* Borders */
+    --border:         1px solid rgba(26, 127, 255, 0.25);
+    --border-thin:    1px solid rgba(26, 127, 255, 0.15);
+    --border-blue:    1px solid #1A7FFF;
+    --border-red:     1px solid #FF1A1A;
+
+    /* Glows — neon on dark bg */
+    --glow-blue:      0 0 16px rgba(26, 127, 255, 0.6);
+    --glow-red:       0 0 16px rgba(255, 26, 26, 0.5);
+    --text-glow-blue: 0 0 8px rgba(26, 127, 255, 0.8);
+    --text-glow-cyan: 0 0 8px rgba(0, 238, 255, 0.7);
+
+    /* Screentone / texture */
+    --screentone:     rgba(0, 0, 0, 0.04);
+
+    /* Legacy aliases for compatibility */
+    --color-panel-light: #0C1220;
+    --color-panel-cream: #04060D;
+    --color-panel-border: #1A7FFF;
+    --color-manga-red: #FF1A1A;
+    --border-bright: 1px solid rgba(26, 127, 255, 0.7);
+    --border-cyan: 1px solid #00EEFF;
+    --color-blue-dim: rgba(26, 127, 255, 0.2);
+  }
+}
+
+/* ====== MANUAL DATA ATTRIBUTE OVERRIDES ====== */
+[data-theme="light"] {
+  --color-bg:       #F0EDE6;
+  --color-bg-2:     #E8E4DC;
+  --color-bg-3:     #FFFFFF;
+  --color-bg-4:     #D6E4F0;
+  --color-white:    #0A0A0F;
+  --color-muted:    #4A5568;
+  --color-faint:    #8A9BB0;
+  --color-blue:     #0047CC;
+  --color-cyan:     #007FA3;
+  --color-red:      #CC1200;
+  --color-warning:  #C45000;
+  --color-green:    #006B3C;
+  --color-border:   #0A0A0F;
+  --color-black:    #0A0A0F;
+  --shadow-brutal:      4px 4px 0px #0A0A0F;
+  --shadow-brutal-blue: 4px 4px 0px #0047CC;
+  --shadow-brutal-red:  4px 4px 0px #CC1200;
+  --border:         2px solid #0A0A0F;
+  --border-thin:    1px solid rgba(0,0,0,0.15);
+  --border-blue:    2px solid #0047CC;
+  --border-red:     2px solid #CC1200;
+  --glow-blue:      0 0 8px rgba(0, 71, 204, 0.3);
+  --glow-red:       0 0 8px rgba(204, 18, 0, 0.3);
+  --text-glow-blue: 0 0 4px rgba(0, 71, 204, 0.4);
+  --text-glow-cyan: 0 0 4px rgba(0, 127, 163, 0.4);
+  --screentone:     rgba(0, 0, 0, 0.035);
+  --color-panel-light: #FFFFFF;
+  --color-panel-cream: #F0EDE6;
+  --color-panel-border: #0A0A0F;
+  --color-manga-red: #CC1200;
+  --border-bright: 1px solid rgba(0, 71, 204, 0.6);
+  --border-cyan: 1px solid #007FA3;
+  --color-blue-dim: rgba(0, 71, 204, 0.2);
+}
+
+[data-theme="dark"] {
+  --color-bg:       #04060D;
+  --color-bg-2:     #080D18;
+  --color-bg-3:     #0C1220;
+  --color-bg-4:     #111827;
+  --color-white:    #D8E8FF;
+  --color-muted:    #5A7899;
+  --color-faint:    #2E4560;
+  --color-blue:     #1A7FFF;
+  --color-cyan:     #00EEFF;
+  --color-red:      #FF1A1A;
+  --color-warning:  #FF6600;
+  --color-green:    #00FF88;
+  --color-border:   #1A7FFF;
+  --color-black:    #000000;
+  --shadow-brutal:      4px 4px 0px #000000;
+  --shadow-brutal-blue: 4px 4px 0px #1A7FFF;
+  --shadow-brutal-red:  4px 4px 0px #FF1A1A;
+  --border:         1px solid rgba(26, 127, 255, 0.25);
+  --border-thin:    1px solid rgba(26, 127, 255, 0.15);
+  --border-blue:    1px solid #1A7FFF;
+  --border-red:     1px solid #FF1A1A;
+  --glow-blue:      0 0 16px rgba(26, 127, 255, 0.6);
+  --glow-red:       0 0 16px rgba(255, 26, 26, 0.5);
+  --text-glow-blue: 0 0 8px rgba(26, 127, 255, 0.8);
+  --text-glow-cyan: 0 0 8px rgba(0, 238, 255, 0.7);
+  --screentone:     rgba(0, 0, 0, 0.04);
+  --color-panel-light: #0C1220;
+  --color-panel-cream: #04060D;
+  --color-panel-border: #1A7FFF;
+  --color-manga-red: #FF1A1A;
+  --border-bright: 1px solid rgba(26, 127, 255, 0.7);
+  --border-cyan: 1px solid #00EEFF;
+  --color-blue-dim: rgba(26, 127, 255, 0.2);
+}
+
+/* ============================================================================
+   GLOBAL RESET & BASE STYLES
+   ============================================================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-white);    /* now resolves to #0A0A0A */
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* SCAN-LINE OVERLAY — very faint on light bg */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.015) 3px,
+    rgba(0, 0, 0, 0.015) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ============================================================================
+   TYPOGRAPHY
+   ============================================================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: var(--text-hero);
+}
+
+h2 {
+  font-size: var(--text-3xl);
+}
+
+h3 {
+  font-size: var(--text-2xl);
+}
+
+h4 {
+  font-size: var(--text-xl);
+}
+
+p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--color-white);    /* resolves to #0A0A0A */
+  text-decoration: none;
+  transition: color 150ms ease;
+  font-family: inherit;
+}
+
+a:hover {
+  color: var(--color-blue);
+}
+
+/* ============================================================================
+   FORMS & INPUTS
+   ============================================================================ */
+
+input,
+textarea,
+select {
+  background-color: rgba(255,255,255,0.6);
+  border: 1.5px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  color: #0A0A0A;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  padding: 12px 16px;
+  width: 100%;
+  transition: all 150ms ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-muted);
+  opacity: 0.7;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-blue);
+  box-shadow: var(--shadow-brutal-blue);
+}
+
+/* ============================================================================
+   BUTTONS
+   ============================================================================ */
+
+button {
+  background-color: #0A0A0A;
+  border: 2px solid #0A0A0A;
+  border-radius: 0;
+  color: var(--color-panel-cream);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  letter-spacing: 0.2em;
+  padding: 12px 32px;
+  text-transform: uppercase;
+  transition: all 150ms ease;
+  box-shadow: var(--shadow-brutal);
+}
+
+button:hover {
+  background-color: var(--color-blue);
+  border-color: var(--color-blue);
+  box-shadow: var(--shadow-brutal-blue);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* ============================================================================
+   UTILITIES
+   ============================================================================ */
+
+.system-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-blue);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  text-shadow: none;
+  display: block;
+  margin-bottom: 0.5rem;
+  padding-left: 12px;
+  border-left: 2px solid var(--color-blue);
+  box-shadow: none;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-left: var(--section-padding-x);
+  padding-right: var(--section-padding-x);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ============================================================================
+   LAYOUT
+   ============================================================================ */
+
+main {
+  width: 100%;
+  min-height: 100vh;
+}
+
+section {
+  padding: var(--section-padding-y) var(--section-padding-x);
+}

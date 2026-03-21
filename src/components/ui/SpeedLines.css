@@ -1,0 +1,18 @@
+/* ============================================================================
+   SpeedLines.css
+   Manga-style speed lines using conic-gradient radial burst
+   ============================================================================ */
+
+.speed-lines {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(0, 102, 255, 0.08) 0deg 2deg,
+    transparent 2deg 8deg
+  );
+  border-radius: 50%;
+}

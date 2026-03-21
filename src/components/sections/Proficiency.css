@@ -1,0 +1,202 @@
+/* ============================================================================
+   PROFICIENCY SECTION STYLES - Light Panel Redesign
+   Cream background + dark text + manga aesthetic
+   ============================================================================ */
+
+.proficiency {
+  background-color: var(--color-bg);
+  padding: var(--section-padding-y) var(--section-padding-x);
+  border-top: 3px solid var(--color-border);
+  border-bottom: 3px solid var(--color-border);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Section number bg text */
+.proficiency-section-number {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: 20vw;
+  color: var(--color-white);
+  opacity: 0.03;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -2vw;
+  pointer-events: none;
+  z-index: 0;
+  line-height: 1;
+  user-select: none;
+}
+
+/* Rotated page-edge label */
+.proficiency-rotated-label {
+  display: none;
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  transform-origin: center;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-blue);
+  opacity: 0.4;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 2;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Halftone screentone overlay */
+.proficiency::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    var(--screentone) 1px,
+    transparent 1px
+  );
+  background-size: 8px 8px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.3;
+}
+
+.proficiency-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  position: relative;
+  z-index: 2;
+}
+
+.proficiency-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  color: var(--color-white);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.chart-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 400px;
+  min-height: 280px;
+  position: relative;
+}
+
+/* シンク率 badge - overlaps chart top-right */
+.sync-rate-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+}
+
+.sync-rate-kanji {
+  font-family: var(--font-japanese);
+  font-size: var(--text-sm);
+  color: var(--color-panel-cream);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* Concentric circle background */
+.chart-wrapper::before {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 0 80px rgba(0, 0, 0, 0.05),
+    0 0 0 160px rgba(0, 0, 0, 0.03),
+    0 0 0 240px rgba(0, 0, 0, 0.02);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  position: relative;
+  z-index: 3;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.legend-name {
+  color: var(--color-white);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.legend-name::after {
+  content: ' //';
+  color: var(--color-blue);
+  font-weight: 700;
+}
+
+.legend-value {
+  color: var(--color-white);
+  font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .proficiency-container {
+    gap: 1.5rem;
+  }
+
+  .proficiency-heading {
+    font-size: var(--text-xl);
+  }
+
+  .chart-wrapper {
+    height: 320px;
+    min-height: 260px;
+  }
+
+  .legend {
+    gap: 1rem;
+    padding: 0.8rem 0;
+  }
+
+  .legend-item {
+    font-size: var(--text-xs);
+  }
+}
+
+@media (min-width: 1100px) {
+  .proficiency-rotated-label {
+    display: block;
+  }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .chart-wrapper,
+  .legend {
+    transition: none;
+  }
+}

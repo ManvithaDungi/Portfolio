@@ -1,0 +1,315 @@
+/* ============================================================================
+   ABOUT SECTION STYLES - Light Panel Redesign
+   Cream background + dark text + manga aesthetic + asymmetric layout
+   ============================================================================ */
+
+.about {
+  background-color: var(--color-bg);
+  padding: var(--section-padding-y) var(--section-padding-x);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: auto;
+  position: relative;
+  overflow: hidden;
+  border-top: 3px solid var(--color-border);
+  border-bottom: 3px solid var(--color-border);
+  color: var(--color-white);
+}
+
+/* ==== DECORATIVE ELEMENTS ==== */
+
+/* Decorative "Developer" kanji background */
+.about::before {
+  content: '開発者';
+  position: absolute;
+  font-family: var(--font-japanese);
+  font-size: 180px;
+  color: var(--screentone);
+  letter-spacing: 0.2em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Halftone screentone overlay */
+.about::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0.06) 1px,
+    transparent 1px
+  );
+  background-size: 8px 8px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.3;
+}
+
+/* Section number bg text */
+.about-section-number {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: 20vw;
+  color: var(--color-white);
+  opacity: 0.03;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -2vw;
+  pointer-events: none;
+  z-index: 0;
+  line-height: 1;
+  user-select: none;
+}
+
+/* Rotated section label - page edge effect */
+.about-rotated-label {
+  display: none;
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  transform-origin: center;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-blue);
+  opacity: 0.4;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 2;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ==== LAYOUT ==== */
+
+.about-container {
+  display: grid;
+  grid-template-columns: 40% 1fr;
+  gap: 1.5rem;
+  max-width: 1100px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  align-items: start;
+}
+
+/* ==== LEFT COLUMN - Bio in MangaPanel ==== */
+
+.about-bio {
+  border: 2.5px solid var(--color-border);
+  box-shadow: var(--shadow-brutal);
+  padding: 1.5rem;
+  background-color: var(--color-bg-3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Halftone inside bio panel */
+.about-bio::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    var(--screentone) 1px,
+    transparent 1px
+  );
+  background-size: 8px 8px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.3;
+}
+
+.about-bio p {
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  color: var(--color-white);
+  line-height: 2;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Standard highlight — blue */
+.about-bio .highlight {
+  color: var(--color-blue);
+  font-weight: 700;
+}
+
+/* Red emphasis — manga chaos */
+.about-bio .emphasis-red {
+  color: var(--color-manga-red);
+  font-size: 1.1em;
+  font-weight: 700;
+}
+
+/* ==== RIGHT COLUMN ==== */
+
+.about-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ==== DATA BLOCKS ==== */
+
+.about-right-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-blue);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding-left: 12px;
+  border-left: 2px solid var(--color-blue);
+  margin-bottom: 0.8rem;
+}
+
+/* Bio Data Row */
+.bio-data {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  border: 2.5px solid var(--color-panel-border);
+  margin-bottom: 1rem;
+}
+
+.bio-data-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 0.8rem;
+  border-bottom: 3px solid var(--color-panel-border);
+  position: relative;
+}
+
+.bio-data-item:last-child {
+  border-bottom: none;
+}
+
+.bio-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-white);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.bio-value {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.bio-divider {
+  display: none;
+}
+
+/* ==== Skills Tags ==== */
+
+.skills-tags-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-blue);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding-left: 12px;
+  border-left: 2px solid var(--color-blue);
+  margin-bottom: 0.5rem;
+}
+
+.skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.skill-tag {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-bg);
+  background-color: var(--color-white);
+  border: 1.5px solid var(--color-white);
+  padding: 4px 12px;
+  border-radius: 0;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 150ms ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.skill-tag:hover {
+  background-color: var(--color-blue);
+  border-color: var(--color-blue);
+  color: var(--color-bg);
+}
+
+/* ==== SYSTEM LABEL OVERRIDES in light panel ==== */
+.about .system-label {
+  color: var(--color-blue);
+  text-shadow: none;
+  border-left-color: var(--color-blue);
+  margin-bottom: 1rem;
+}
+
+/* ==== RESPONSIVE ==== */
+
+@media (min-width: 1100px) {
+  .about-rotated-label {
+    display: block;
+  }
+}
+
+@media (max-width: 1000px) {
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .about-bio {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .about {
+    padding: var(--section-padding-y) var(--section-padding-x);
+  }
+
+  .about-bio p {
+    line-height: 1.8;
+    font-size: var(--text-sm);
+  }
+
+  .about-container {
+    gap: 1rem;
+  }
+
+  .skills-tags {
+    gap: 0.4rem;
+  }
+
+  .skill-tag {
+    padding: 3px 10px;
+    font-size: var(--text-xs);
+  }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .skill-tag {
+    transition: none;
+  }
+}

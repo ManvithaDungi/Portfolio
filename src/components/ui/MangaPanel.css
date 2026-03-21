@@ -1,0 +1,72 @@
+/* ============================================================================
+   MangaPanel.css
+   Brutalist panel variants with hard shadows and hover lift effects
+   ============================================================================ */
+
+.manga-panel {
+  border-radius: 0;
+  transition: all 0.15s ease-out;
+}
+
+/* DARK VARIANT - Blue borders + blue shadow + neon glow */
+.manga-panel-dark {
+  background-color: var(--color-bg-2);
+  border: 2px solid var(--color-blue);
+  box-shadow: var(--shadow-brutal-blue);
+  color: var(--color-white);
+}
+
+.manga-panel-dark:hover {
+  box-shadow: var(--glow-blue);
+}
+
+/* LIGHT VARIANT - Black borders + black shadow + cream bg */
+.manga-panel-light {
+  background-color: var(--color-bg-3);
+  border: 2.5px solid var(--color-border);
+  box-shadow: var(--shadow-brutal);
+  color: var(--color-white);
+}
+
+.manga-panel-light:hover {
+  border-color: var(--color-blue);
+}
+
+/* ACCENT VARIANT - Red bg + black border + cream text */
+.manga-panel-accent {
+  background-color: var(--color-manga-red);
+  border: 2.5px solid var(--color-border);
+  box-shadow: var(--shadow-brutal);
+  color: var(--color-bg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 8px 16px;
+}
+
+.manga-panel-accent:hover {
+  box-shadow: 0 0 12px rgba(232, 0, 45, 0.5);
+}
+
+/* OFFSET HOVER - Lift effect with growing shadow */
+.manga-panel-offset {
+  cursor: pointer;
+}
+
+.manga-panel-offset:hover {
+  transform: translate(-3px, -3px);
+}
+
+.manga-panel-dark.manga-panel-offset:hover {
+  box-shadow: 9px 9px 0px var(--color-blue), var(--glow-blue);
+}
+
+.manga-panel-light.manga-panel-offset:hover {
+  box-shadow: 9px 9px 0px var(--color-white);
+}
+
+.manga-panel-accent.manga-panel-offset:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0px var(--color-white);
+}

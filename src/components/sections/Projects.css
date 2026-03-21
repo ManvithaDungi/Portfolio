@@ -1,0 +1,261 @@
+/* ============================================================================
+   PROJECTS SECTION STYLES - Light Panel Redesign
+   Off-white background + manga chapter headers + light panels
+   ============================================================================ */
+
+.projects {
+  background-color: var(--color-bg-2);
+  padding: var(--section-padding-y) var(--section-padding-x);
+  position: relative;
+  overflow: hidden;
+  border-top: 3px solid var(--color-border);
+  border-bottom: 3px solid var(--color-border);
+}
+
+/* Section number bg text */
+.projects-section-number {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: 20vw;
+  color: var(--color-white);
+  opacity: 0.03;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -2vw;
+  pointer-events: none;
+  z-index: 0;
+  line-height: 1;
+  user-select: none;
+}
+
+/* Rotated page-edge label */
+.projects-rotated-label {
+  display: none;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  transform-origin: center;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-blue);
+  opacity: 0.4;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 2;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Halftone screentone overlay */
+.projects::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    var(--screentone) 1px,
+    transparent 1px
+  );
+  background-size: 8px 8px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.3;
+}
+
+/* Decorative "Projects" kanji - right side */
+.projects::after {
+  content: 'プロジェクト';
+  position: absolute;
+  font-family: var(--font-japanese);
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.12);
+  writing-mode: vertical-rl;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.projects-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.project-row {
+  border: 2.5px solid var(--color-border);
+  box-shadow: var(--shadow-brutal);
+  border-radius: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 150ms ease-out;
+  position: relative;
+}
+
+.project-row:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-brutal);
+}
+
+/* Manga Chapter Header Bar */
+.project-header {
+  background-color: var(--color-white);
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.project-id {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-bg);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.project-status {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: 2px 8px;
+  border: 1px solid;
+  border-radius: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background-color: transparent;
+}
+
+.project-status.status-live {
+  border-color: var(--color-cyan);
+  color: var(--color-cyan);
+}
+
+.project-status.status-wip {
+  border-color: var(--color-warning);
+  color: var(--color-warning);
+}
+
+/* Project Content Area */
+.project-content {
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.project-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--color-white);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 0;
+}
+
+.project-description {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: #2A2A2A;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.project-stack {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  margin: 0.5rem 0;
+}
+
+.stack-label {
+  color: var(--color-blue);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.stack-items {
+  color: var(--color-blue);
+  letter-spacing: 0.05em;
+}
+
+.project-links {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.project-link {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: #0A0A0A;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 150ms ease;
+}
+
+.project-link:hover {
+  color: var(--color-blue);
+}
+
+/* Responsive */
+@media (min-width: 1100px) {
+  .projects-rotated-label {
+    display: block;
+  }
+}
+
+@media (max-width: 1000px) {
+  .projects::after {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-content {
+    padding: 16px 20px;
+  }
+
+  .project-title {
+    font-size: var(--text-lg);
+  }
+
+  .project-description {
+    font-size: var(--text-sm);
+  }
+
+  .project-stack {
+    flex-wrap: wrap;
+  }
+
+  .project-links {
+    gap: 1rem;
+  }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .project-row {
+    transition: none;
+  }
+}

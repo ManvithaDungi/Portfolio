@@ -1,0 +1,39 @@
+/* ============================================================================
+   NERVLINE COMPONENT STYLES
+   ============================================================================ */
+
+.nerv-line {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+.nerv-line-left {
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-blue-dim);
+}
+
+.nerv-line-text {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.nerv-line-text.align-right {
+  margin-left: auto;
+}
+
+.nerv-line-text.align-left {
+  margin-right: auto;
+}
+
+.nerv-line-text.align-center {
+  flex: 1;
+  text-align: center;
+}

@@ -1,0 +1,216 @@
+/* ============================================================================
+   EXPERIENCE SECTION STYLES
+   Dark section with manga badge dots and vertical Japanese text
+   ============================================================================ */
+
+.experience {
+  background-color: var(--color-bg);
+  padding: var(--section-padding-y) var(--section-padding-x);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Section number bg text */
+.experience-section-number {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: 20vw;
+  color: var(--color-white);
+  opacity: 0.03;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -2vw;
+  pointer-events: none;
+  z-index: 0;
+  line-height: 1;
+  user-select: none;
+}
+
+/* Rotated page-edge label */
+.experience-rotated-label {
+  display: none;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  transform-origin: center;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-blue);
+  opacity: 0.4;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 2;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.experience-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+  padding-left: 60px;
+}
+
+/* Vertical timeline line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: var(--color-blue-dim);
+}
+
+/* Vertical Japanese text "経験" along the timeline */
+.timeline-japanese {
+  position: absolute;
+  left: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-japanese);
+  font-size: 13px;
+  color: rgba(0, 102, 255, 0.15);
+  writing-mode: vertical-rl;
+  letter-spacing: 0.1em;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
+}
+
+.timeline-entry {
+  display: flex;
+  gap: 1.2rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+/* Manga badge dot — numbered, red, brutal, no border-radius */
+.timeline-badge {
+  position: absolute;
+  left: -46px;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  background-color: var(--color-manga-red);
+  border: 2px solid var(--color-white);
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-bg);
+  font-weight: 700;
+  z-index: 1;
+  flex-shrink: 0;
+  box-shadow: 2px 2px 0px var(--color-white);
+}
+
+.entry-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+}
+
+.entry-title {
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  color: var(--color-white);
+  font-weight: 700;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.entry-meta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.entry-org {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-cyan);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-shadow: var(--text-glow-cyan);
+}
+
+.entry-date {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-cyan);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-shadow: var(--text-glow-cyan);
+}
+
+.entry-description {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  margin: 0.5rem 0 0 0;
+  line-height: 1.8;
+}
+
+/* Responsive */
+@media (min-width: 1100px) {
+  .experience-rotated-label {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .timeline {
+    padding-left: 44px;
+    gap: 1.5rem;
+  }
+
+  .timeline-badge {
+    left: -30px;
+    width: 26px;
+    height: 26px;
+    font-size: 9px;
+  }
+
+  .entry-title {
+    font-size: var(--text-base);
+  }
+
+  .entry-description {
+    font-size: var(--text-sm);
+  }
+
+  .entry-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .timeline-japanese {
+    display: none;
+  }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .timeline-entry {
+    transition: none;
+  }
+}
