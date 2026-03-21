@@ -4,6 +4,8 @@
    CSS conic-gradient creates radial lines effect
    ============================================================================ */
 
+import './SpeedLines.css';
+
 export const SpeedLines = ({ 
   size = 600,
   opacity = 0.4,

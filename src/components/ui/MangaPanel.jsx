@@ -6,6 +6,8 @@
    - accent: Red bg + black border + cream text
    ============================================================================ */
 
+import './MangaPanel.css';
+
 export const MangaPanel = ({ 
   variant = 'dark', 
   children, 

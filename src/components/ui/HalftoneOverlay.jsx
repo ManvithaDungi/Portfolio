@@ -3,6 +3,8 @@
    Screentone dot pattern overlay - manga paper texture effect
    ============================================================================ */
 
+import './HalftoneOverlay.css';
+
 export const HalftoneOverlay = ({ 
   opacity = 0.5,
   dotSize = 8,

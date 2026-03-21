@@ -4,6 +4,8 @@
    Creates manga chapter break visual separation
    ============================================================================ */
 
+import './TransitionRibbon.css';
+
 export const TransitionRibbon = ({ direction = 'dark-to-light' }) => {
   const isDarkToLight = direction === 'dark-to-light';
   
