@@ -40,8 +40,6 @@ jobs:
 
       - name: Build project
         run: npm run build
-        env:
-          DEPLOY_ENV: github-pages
 
       - name: Upload artifact to GitHub Pages
         uses: actions/upload-pages-artifact@v3
