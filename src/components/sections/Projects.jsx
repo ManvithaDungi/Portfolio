@@ -131,7 +131,7 @@ const Projects = () => {
                       rel="noopener noreferrer"
                       className="project-link"
                     >
-                      LIVE DEMO ↗
+                      VIEW DEMO ↗
                     </a>
                   )}
                 </div>

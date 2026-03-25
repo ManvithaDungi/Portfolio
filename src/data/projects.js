@@ -75,7 +75,7 @@ export const projectsData = [
       'Privacy-first design for women\'s health with AI-backed symptom insights'
     ],
     github: 'https://github.com/ManvithaDungi/AI_SymptomAnalyserForWomen',
-    live: '',
+    live: 'https://women-ai-cd813.web.app/',
     status: 'COMPLETE',
     type: 'Hackathon Project (ACM Girls Hackathon)',
   },
@@ -91,7 +91,7 @@ export const projectsData = [
       'MFA support, session management, and modular backend for blockchain/IoT integration'
     ],
     github: 'https://github.com/ManvithaDungi/PatientManagementSystem',
-    live: '',
+    live: 'http://54.252.217.169:3000/login',
     status: 'COMPLETE',
     type: 'Healthcare Platform Project',
   },
