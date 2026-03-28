@@ -96,22 +96,6 @@ export const projectsData = [
     type: 'Healthcare Platform Project',
   },
   {
-    id: '07',
-    title: 'Safety-Heroes — Interactive Safety Learning Platform',
-    description: 'Autism-friendly educational platform with interactive mini-games and habit tracking',
-    stack: ['React', 'React Hooks', 'React Router', 'Material UI', 'CSS Grid'],
-    features: [
-      'Autism-friendly design focusing on safety education and daily habits',
-      'Safe vs unsafe decision-making game with interactive feedback',
-      'State management via React Hooks (useState, useEffect, useContext)',
-      'Responsive accessible UI using CSS Grid, Flexbox, and Material UI'
-    ],
-    github: 'https://github.com/ManvithaDungi/Safety-Heroes',
-    live: '',
-    status: 'COMPLETE',
-    type: 'Educational Technology Project',
-  },
-  {
     id: '08',
     title: 'SecureRx — Secure Prescription Management System',
     description: 'Healthcare security system with end-to-end encryption and QR verification',
