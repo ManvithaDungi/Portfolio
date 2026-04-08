@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import SystemLabel from '../ui/SystemLabel';
+import RadarChart from '../ui/RadarChart';
+import MangaPanel from '../ui/MangaPanel';
 import './About.css';
 
 const About = () => {
@@ -44,6 +46,18 @@ const About = () => {
       y: 0,
       transition: {
         duration: prefersReducedMotion ? 0 : 0.5,
+        ease: [0.25, 0.46, 0.45, 0.94],
+      },
+    },
+  };
+
+  const chartItemVariants = {
+    hidden: { opacity: 0, scale: prefersReducedMotion ? 1 : 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: prefersReducedMotion ? 0 : 0.45,
         ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
@@ -104,6 +118,15 @@ const About = () => {
     'Solidity',
   ];
 
+  const proficiencyData = [
+    { name: 'Frontend', value: 82 },
+    { name: 'Backend', value: 70 },
+    { name: 'DSA', value: 75 },
+    { name: 'Design', value: 78 },
+    { name: 'DevOps', value: 60 },
+    { name: 'System', value: 55 },
+  ];
+
   return (
     <motion.section
       className="about"
@@ -130,13 +153,15 @@ const About = () => {
         className="about-container"
         variants={containerVariants}
       >
-        {/* LEFT COLUMN — Bio Panel */}
-        <motion.div variants={itemVariants}>
+        {/* LEFT COLUMN — Bio Panel + Proficiency Chart */}
+        <motion.div className="about-left-col" variants={containerVariants}>
           {/* System Label */}
-          <SystemLabel text="SECTION_02 // PILOT_PROFILE" />
+          <motion.div variants={itemVariants}>
+            <SystemLabel text="SECTION_02 // PILOT_PROFILE" />
+          </motion.div>
 
           {/* Bio Paragraph inside brutal panel */}
-          <div className="about-bio">
+          <motion.div className="about-bio" variants={itemVariants}>
             <p>
               3rd year Computer Science student at{' '}
               <span className="highlight">
@@ -149,7 +174,31 @@ const About = () => {
                 <span className="emphasis-red">solving complex problems</span>.
               </span>
             </p>
-          </div>
+          </motion.div>
+
+          {/* Proficiency Chart — below pilot profile */}
+          <motion.div className="about-proficiency-inline" variants={itemVariants}>
+            <div className="about-proficiency-label">SYNC_RATE // PROFICIENCY</div>
+
+            {/* Chart wrapper with シンク率 badge */}
+            <motion.div className="chart-wrapper" variants={chartItemVariants}>
+              <RadarChart data={proficiencyData} lightMode={true} />
+
+              {/* シンク率 accent badge overlapping chart */}
+              <MangaPanel variant="accent" className="sync-rate-badge">
+                <span className="sync-rate-kanji">シンク率</span>
+              </MangaPanel>
+            </motion.div>
+
+            <motion.div className="legend" variants={chartItemVariants}>
+              {proficiencyData.map((item) => (
+                <div key={item.name} className="legend-item">
+                  <span className="legend-name">{item.name.toUpperCase()}</span>
+                  <span className="legend-value">{item.value}%</span>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
         </motion.div>
 
         {/* RIGHT COLUMN — Info blocks */}

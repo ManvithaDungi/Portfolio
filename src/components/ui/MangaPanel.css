@@ -32,12 +32,12 @@
   border-color: var(--color-blue);
 }
 
-/* ACCENT VARIANT - Red bg + black border + cream text */
+/* ACCENT VARIANT - Red bg + black border + white text */
 .manga-panel-accent {
   background-color: var(--color-manga-red);
   border: 2.5px solid var(--color-border);
   box-shadow: var(--shadow-brutal);
-  color: var(--color-bg);
+  color: #FFFFFF;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -63,7 +63,7 @@
 }
 
 .manga-panel-light.manga-panel-offset:hover {
-  box-shadow: 9px 9px 0px var(--color-white);
+  box-shadow: 9px 9px 0px var(--color-border);
 }
 
 .manga-panel-accent.manga-panel-offset:hover {

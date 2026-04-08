@@ -103,7 +103,7 @@
 .sync-rate-kanji {
   font-family: var(--font-japanese);
   font-size: var(--text-sm);
-  color: var(--color-panel-cream);
+  color: #FFFFFF;
   font-weight: 700;
   letter-spacing: 0.05em;
 }

@@ -89,8 +89,8 @@
 
     /* Text */
     --color-white:    #D8E8FF;   /* off white, cold blue tint */
-    --color-muted:    #5A7899;   /* readable mid tone */
-    --color-faint:    #2E4560;   /* dimmest text, labels */
+    --color-muted:    #7AAFD4;   /* readable mid tone — bumped for dark bg contrast */
+    --color-faint:    #3D5F82;   /* dimmest text, labels */
 
     /* Anime / NGE accents */
     --color-blue:     #1A7FFF;   /* electric blue */
@@ -177,8 +177,8 @@
   --color-bg-3:     #0C1220;
   --color-bg-4:     #111827;
   --color-white:    #D8E8FF;
-  --color-muted:    #5A7899;
-  --color-faint:    #2E4560;
+  --color-muted:    #7AAFD4;
+  --color-faint:    #3D5F82;
   --color-blue:     #1A7FFF;
   --color-cyan:     #00EEFF;
   --color-red:      #FF1A1A;
@@ -231,21 +231,7 @@ body {
   position: relative;
 }
 
-/* SCAN-LINE OVERLAY — very faint on light bg */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 3px,
-    rgba(0, 0, 0, 0.015) 3px,
-    rgba(0, 0, 0, 0.015) 4px
-  );
-  pointer-events: none;
-  z-index: 9999;
-}
+/* CRT overlay is now handled by <CRTOverlay> component (CRTOverlay.css) */
 
 /* ============================================================================
    TYPOGRAPHY
@@ -298,10 +284,10 @@ a:hover {
 input,
 textarea,
 select {
-  background-color: rgba(255,255,255,0.6);
-  border: 1.5px solid rgba(0, 0, 0, 0.2);
+  background-color: var(--color-bg-3);
+  border: 1.5px solid var(--color-border);
   border-radius: 0;
-  color: #0A0A0A;
+  color: var(--color-white);
   font-family: var(--font-mono);
   font-size: var(--text-sm);
   padding: 12px 16px;
@@ -328,10 +314,10 @@ select:focus {
    ============================================================================ */
 
 button {
-  background-color: #0A0A0A;
-  border: 2px solid #0A0A0A;
+  background-color: var(--color-border);
+  border: 2px solid var(--color-border);
   border-radius: 0;
-  color: var(--color-panel-cream);
+  color: var(--color-bg);
   cursor: pointer;
   font-family: var(--font-mono);
   font-size: var(--text-sm);

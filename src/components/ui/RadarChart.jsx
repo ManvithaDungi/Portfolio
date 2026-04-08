@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   RadarChart as RechartsRadarChart,
   PolarGrid,
@@ -7,21 +7,43 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-const RadarChart = ({ data, lightMode = false }) => {
-  const chartMargin = { top: 20, right: 20, bottom: 20, left: 20 };
-  const gridColor = lightMode ? 'rgba(0,0,0,0.1)' : 'rgba(0, 102, 255, 0.2)';
-  const tickColor = lightMode ? '#2A2A2A' : 'var(--color-cyan)';
+/**
+ * useTheme — returns 'dark' | 'light' and updates live when
+ * the [data-theme] attribute on <html> changes.
+ */
+function useTheme() {
+  const getTheme = () =>
+    typeof document !== 'undefined'
+      ? (document.documentElement.getAttribute('data-theme') ?? 'light')
+      : 'light';
+
+  const [theme, setTheme] = useState(getTheme);
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => setTheme(getTheme()));
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  return theme;
+}
+
+const RadarChart = ({ data }) => {
+  const theme   = useTheme();
+  const isDark  = theme === 'dark';
+
+  const gridColor   = isDark ? 'rgba(26, 127, 255, 0.2)' : 'rgba(0, 71, 204, 0.12)';
+  const tickColor   = isDark ? '#D8E8FF'                  : '#1A1A2E';
+  const radarStroke = isDark ? '#1A7FFF'                  : '#0047CC';
+  const radarFill   = isDark ? 'rgba(26, 127, 255, 0.15)' : 'rgba(0, 71, 204, 0.10)';
+  const dotFill     = isDark ? '#00EEFF'                  : '#0047CC';
 
   return (
-    <ResponsiveContainer
-      width="100%"
-      height={400}
-      minHeight={280}
-    >
-      <RechartsRadarChart
-        data={data}
-        margin={chartMargin}
-      >
+    <ResponsiveContainer width="100%" height={340} minHeight={240}>
+      <RechartsRadarChart data={data} margin={{ top: 16, right: 24, bottom: 16, left: 24 }}>
         <PolarGrid
           stroke={gridColor}
           strokeDasharray="0"
@@ -31,26 +53,21 @@ const RadarChart = ({ data, lightMode = false }) => {
           dataKey="name"
           tick={{
             fill: tickColor,
-            fontSize: 12,
+            fontSize: 11,
             fontFamily: 'var(--font-mono)',
-            textTransform: 'uppercase',
+            fontWeight: 700,
             letterSpacing: '0.05em',
           }}
-          angle={90}
           isAnimationActive={false}
         />
         <Radar
           name="Proficiency"
           dataKey="value"
-          stroke="var(--color-blue)"
+          stroke={radarStroke}
           strokeWidth={1.5}
-          fill={lightMode ? 'rgba(0, 102, 255, 0.12)' : 'rgba(0, 102, 255, 0.15)'}
+          fill={radarFill}
           isAnimationActive={false}
-          dot={{
-            fill: 'var(--color-cyan)',
-            r: 3,
-            strokeWidth: 0,
-          }}
+          dot={{ fill: dotFill, r: 3, strokeWidth: 0 }}
         />
       </RechartsRadarChart>
     </ResponsiveContainer>

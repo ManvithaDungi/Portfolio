@@ -6,6 +6,7 @@ import './Projects.css';
 
 const Projects = () => {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [hoveredId, setHoveredId] = useState(null);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -21,18 +22,18 @@ const Projects = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08,
+        staggerChildren: 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, x: prefersReducedMotion ? 0 : -20 },
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 24 },
     visible: {
       opacity: 1,
-      x: 0,
+      y: 0,
       transition: {
-        duration: prefersReducedMotion ? 0 : 0.45,
+        duration: prefersReducedMotion ? 0 : 0.5,
         ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
@@ -73,53 +74,44 @@ const Projects = () => {
       <div className="projects-rotated-label" aria-hidden="true">
         SECTION_04 // CLASSIFIED_PROJECTS
       </div>
+
       <div className="projects-container">
         <motion.div variants={itemVariants}>
           <SystemLabel text="SECTION_04 // CLASSIFIED_PROJECTS" />
         </motion.div>
 
-        <motion.div className="projects-list" variants={containerVariants}>
+        <motion.div className="projects-grid" variants={containerVariants}>
           {projectsData.map((project) => (
-            <motion.div
+            <motion.article
               key={project.id}
-              className="project-row"
+              className={`project-card${hoveredId === project.id ? ' project-card--hovered' : ''}`}
               variants={itemVariants}
+              onMouseEnter={() => setHoveredId(project.id)}
+              onMouseLeave={() => setHoveredId(null)}
+              aria-label={`Project: ${project.title}`}
             >
-              <div className="project-header">
-                <div className="project-id">CHAPTER №{project.id}</div>
-                <div className={`project-status status-${project.status.toLowerCase()}`}>
-                  {project.status}
+              {/* Thumbnail */}
+              <div className="project-thumb-wrap">
+                <img
+                  src={project.thumbnail}
+                  alt={`${project.title} preview`}
+                  className="project-thumb"
+                  loading="lazy"
+                />
+                <div className="project-thumb-overlay">
+                  <div className="project-id-badge">CHAPTER №{project.id}</div>
+                  <div className={`project-status status-${project.status.toLowerCase()}`}>
+                    {project.status}
+                  </div>
                 </div>
-              </div>
-
-              <div className="project-content">
-                <h3 className="project-title">{project.title}</h3>
-
-                <p className="project-description">{project.description}</p>
-
-                <ul className="project-features">
-                  {project.features.map((f, i) => (
-                    <li key={i} className="project-feature-item">
-                      <span className="feature-bullet">▸</span>
-                      <span className="feature-text">{f}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="project-stack">
-                  <span className="stack-label">STACK:</span>
-                  <span className="stack-items">
-                    {project.stack.join(' · ')}
-                  </span>
-                </div>
-
-                <div className="project-links">
+                {/* Hover links overlay */}
+                <div className="project-thumb-links">
                   {project.github && (
                     <a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="project-link"
+                      className="project-thumb-link"
                     >
                       VIEW CODE ↗
                     </a>
@@ -129,14 +121,28 @@ const Projects = () => {
                       href={project.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="project-link"
+                      className="project-thumb-link project-thumb-link--live"
                     >
-                      VIEW DEMO ↗
+                      LIVE DEMO ↗
                     </a>
                   )}
                 </div>
               </div>
-            </motion.div>
+
+              {/* Card Body */}
+              <div className="project-body">
+                <div className="project-type">{project.type}</div>
+                <h3 className="project-title">{project.title}</h3>
+                <p className="project-description">{project.description}</p>
+
+                {/* Tech Stack Pills */}
+                <div className="project-stack-pills">
+                  {project.stack.map((tech, i) => (
+                    <span key={i} className="stack-pill">{tech}</span>
+                  ))}
+                </div>
+              </div>
+            </motion.article>
           ))}
         </motion.div>
       </div>

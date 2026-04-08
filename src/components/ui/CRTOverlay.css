@@ -1,0 +1,215 @@
+/* ============================================================================
+   CRT OVERLAY — Cathode-Ray Tube / Physical Terminal Effect
+   All layers are fixed, full-viewport, pointer-events: none, z-index: 9000+
+   ============================================================================ */
+
+/* ── Root wrapper ─────────────────────────────────────────────────────────── */
+.crt-root {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9900;
+  /* isolate stacking context */
+  isolation: isolate;
+}
+
+/* ── 1. SCANLINES ─────────────────────────────────────────────────────────── *
+ * Tight repeating horizontal lines — simulates the electron beam rows.
+ * Light mode: very faint (0.04 opacity). Dark mode: more visible (0.10).
+ * --------------------------------------------------------------------------- */
+.crt-scanlines {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(0, 0, 0, 0.08) 3px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  animation: crt-scanline-drift 12s linear infinite;
+  opacity: 0.6;
+  mix-blend-mode: multiply;
+}
+
+@keyframes crt-scanline-drift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 80px; }
+}
+
+/* Dark-mode scanlines — data-attribute override */
+[data-theme="dark"] .crt-scanlines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.18) 2px,
+    rgba(0, 0, 0, 0.18) 3px
+  );
+  opacity: 1;
+  mix-blend-mode: normal;
+}
+
+/* Dark-mode scanlines — system preference */
+@media (prefers-color-scheme: dark) {
+  .crt-scanlines {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 2px,
+      rgba(0, 0, 0, 0.18) 2px,
+      rgba(0, 0, 0, 0.18) 3px
+    );
+    opacity: 1;
+    mix-blend-mode: normal;
+  }
+}
+
+/* ── 2. MOVING BEAM SWEEP ─────────────────────────────────────────────────── *
+ * A single luminous horizontal band that slowly travels down the screen,
+ * like the refresh sweep of an old CRT. Very subtle.
+ * --------------------------------------------------------------------------- */
+.crt-beam {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent calc(var(--beam-pos, 0%) - 2px),
+    rgba(255, 255, 255, 0.025) calc(var(--beam-pos, 0%) - 2px),
+    rgba(255, 255, 255, 0.07)  calc(var(--beam-pos, 0%)),
+    rgba(255, 255, 255, 0.025) calc(var(--beam-pos, 0%) + 2px),
+    transparent calc(var(--beam-pos, 0%) + 2px)
+  );
+  animation: crt-beam-sweep 8s linear infinite;
+  mix-blend-mode: screen;
+  opacity: 0.8;
+}
+
+@keyframes crt-beam-sweep {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  5%   { opacity: 1; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+/* ── 3. RGB / CHROMATIC FLICKER ───────────────────────────────────────────── *
+ * Periodic very-subtle red/blue color-channel shift. Mimics phosphor lag
+ * and degaussing artefacts. Fires roughly every 6 seconds.
+ * --------------------------------------------------------------------------- */
+.crt-rgb {
+  position: absolute;
+  inset: 0;
+  animation: crt-rgb-pulse 6s ease-in-out infinite;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+@keyframes crt-rgb-pulse {
+  0%, 88%, 100% {
+    opacity: 0;
+    background: transparent;
+  }
+  90% {
+    opacity: 1;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 0,   0,   0.03) 0%,
+      transparent               40%,
+      rgba(0,   0, 255, 0.03)  100%
+    );
+    transform: translate(1px, 0);
+  }
+  92% {
+    opacity: 1;
+    background: linear-gradient(
+      135deg,
+      rgba(0,   0, 255, 0.025) 0%,
+      transparent                40%,
+      rgba(255, 0,   0,  0.025) 100%
+    );
+    transform: translate(-1px, 0);
+  }
+  94% {
+    opacity: 0;
+    background: transparent;
+    transform: translate(0, 0);
+  }
+}
+
+/* ── 4. PHOSPHOR VIGNETTE ─────────────────────────────────────────────────── *
+ * Radial darkness at the edges — real CRTs have a curved glass with brighter
+ * center and dark falloff toward corners.
+ * --------------------------------------------------------------------------- */
+.crt-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 48%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.18) 80%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+  pointer-events: none;
+}
+
+/* Slightly stronger vignette in dark mode */
+[data-theme="dark"] .crt-vignette {
+  background: radial-gradient(
+    ellipse at 50% 48%,
+    transparent 45%,
+    rgba(0, 0, 0, 0.25) 75%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+/* ── 5. ANIMATED NOISE / GRAIN ────────────────────────────────────────────── *
+ * A rapidly shifting pseudo-random grain. Done with a repeating SVG
+ * turbulence filter baked as a data-URI background, animated via
+ * background-position to simulate randomness.
+ * --------------------------------------------------------------------------- */
+.crt-noise {
+  position: absolute;
+  inset: 0;
+  /* Inline SVG turbulence as a repeating background tile */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  animation: crt-noise-shift 0.12s steps(1) infinite;
+  opacity: 0.028;
+  mix-blend-mode: overlay;
+}
+
+@keyframes crt-noise-shift {
+  0%   { background-position:   0px   0px; }
+  10%  { background-position: -40px  20px; }
+  20%  { background-position:  60px -30px; }
+  30%  { background-position: -20px  50px; }
+  40%  { background-position:  80px -10px; }
+  50%  { background-position: -60px  40px; }
+  60%  { background-position:  30px -50px; }
+  70%  { background-position: -80px  10px; }
+  80%  { background-position:  50px  30px; }
+  90%  { background-position: -30px -20px; }
+  100% { background-position:  10px  60px; }
+}
+
+/* Higher noise in dark mode */
+[data-theme="dark"] .crt-noise {
+  opacity: 0.045;
+}
+
+/* ── Reduce-motion: kill animations, keep static layers ──────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .crt-scanlines,
+  .crt-beam,
+  .crt-rgb,
+  .crt-noise {
+    animation: none !important;
+  }
+
+  .crt-beam {
+    display: none;
+  }
+}

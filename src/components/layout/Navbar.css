@@ -8,9 +8,10 @@
   left: 0;
   right: 0;
   height: 64px;
-  background-color: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--border);
+  background-color: color-mix(in srgb, var(--color-bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-border);
   z-index: 100;
 }
 
@@ -161,7 +162,8 @@
   position: absolute;
   font-family: var(--font-japanese);
   font-size: clamp(80px, 25vw, 30vw);
-  color: rgba(0, 102, 255, 0.05);
+  color: var(--color-blue);
+  opacity: 0.06;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

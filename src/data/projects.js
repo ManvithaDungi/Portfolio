@@ -1,3 +1,11 @@
+import thumbDrone from '../assets/projects/thumb_drone.png';
+import thumbZynk from '../assets/projects/thumb_zynk.png';
+import thumbHealth from '../assets/projects/thumb_health.png';
+import thumbArbitrage from '../assets/projects/thumb_arbitrage.png';
+import thumbWomensHealth from '../assets/projects/thumb_womens_health.png';
+import thumbPatientMgmt from '../assets/projects/thumb_patient_mgmt.png';
+import thumbSecureRx from '../assets/projects/thumb_securerx.png';
+
 export const projectsData = [
   {
     id: '01',
@@ -14,6 +22,7 @@ export const projectsData = [
     live: '',
     status: 'COMPLETE',
     type: 'Self-Driven Systems Project',
+    thumbnail: thumbDrone,
   },
   {
     id: '02',
@@ -30,6 +39,7 @@ export const projectsData = [
     live: '',
     status: 'COMPLETE',
     type: 'Curriculum Project',
+    thumbnail: thumbZynk,
   },
   {
     id: '03',
@@ -46,6 +56,7 @@ export const projectsData = [
     live: '',
     status: 'COMPLETE',
     type: 'Embedded Systems Project',
+    thumbnail: thumbHealth,
   },
   {
     id: '04',
@@ -62,22 +73,24 @@ export const projectsData = [
     live: '',
     status: 'COMPLETE',
     type: 'Hackathon Project (BNB Chain YZi Labs Hackathon-2026)',
+    thumbnail: thumbArbitrage,
   },
   {
     id: '05',
     title: 'AI Moderated Peer Community & Symptom Checker',
-    description: 'Privacy-first women\'s health platform with AI moderation and wellness tracking',
+    description: "Privacy-first women's health platform with AI moderation and wellness tracking",
     stack: ['React', 'Firebase', 'Gemini', 'Vite', 'Hugging Face'],
     features: [
       'Two-layer AI moderation: Hugging Face sentiment analysis + Gemini safety checks',
       'Personal wellness journal for tracking symptoms, moods, and health patterns',
       'Integrated Google Maps API for locating nearby wellness centers',
-      'Privacy-first design for women\'s health with AI-backed symptom insights'
+      "Privacy-first design for women's health with AI-backed symptom insights"
     ],
     github: 'https://github.com/ManvithaDungi/AI_SymptomAnalyserForWomen',
     live: 'https://women-ai-cd813.web.app/',
     status: 'COMPLETE',
     type: 'Hackathon Project (ACM Girls Hackathon)',
+    thumbnail: thumbWomensHealth,
   },
   {
     id: '06',
@@ -94,6 +107,7 @@ export const projectsData = [
     live: 'http://54.252.217.169:3000/login',
     status: 'COMPLETE',
     type: 'Healthcare Platform Project',
+    thumbnail: thumbPatientMgmt,
   },
   {
     id: '08',
@@ -110,5 +124,6 @@ export const projectsData = [
     live: '',
     status: 'COMPLETE',
     type: 'Healthcare Security Project',
+    thumbnail: thumbSecureRx,
   },
 ];
