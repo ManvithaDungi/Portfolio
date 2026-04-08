@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import emailjs from '@emailjs/browser';
 import { motion } from 'framer-motion';
 import SystemLabel from '../ui/SystemLabel';
 import SpeedLines from '../ui/SpeedLines';
@@ -8,6 +9,8 @@ import './Contact.css';
 
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
   const contacts = [
@@ -44,16 +47,52 @@ const Contact = () => {
     visible: { opacity: 0.03, transition: { duration: 1.2 } },
   };
 
-  const onSubmit = (data) => {
-    // Simulate form submission
-    console.log('Form data:', data);
-    setSubmitted(true);
-    reset();
-    setTimeout(() => setSubmitted(false), 3000);
+  const onSubmit = async (data) => {
+    setIsSubmitting(true);
+    setSubmitError(null);
+    
+    try {
+      // Replace these with your actual EmailJS credentials
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_placeholder';
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_placeholder';
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'public_key_placeholder';
+
+      if (serviceId === 'service_placeholder') {
+         console.warn("EmailJS credentials not configured. Simulating submission.");
+         await new Promise(resolve => setTimeout(resolve, 1500));
+         setSubmitted(true);
+         reset();
+         setTimeout(() => setSubmitted(false), 3000);
+         return;
+      }
+
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: data.name,
+          reply_to: data.email,
+          message: data.message,
+        },
+        publicKey
+      );
+
+      setSubmitted(true);
+      reset();
+      setTimeout(() => setSubmitted(false), 3000);
+    } catch (error) {
+      console.error('FAILED...', error);
+      setSubmitError('TRANSMISSION FAILED. PLEASE TRY AGAIN.');
+      // Keep error message open for a bit
+      setTimeout(() => setSubmitError(null), 5000); 
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <motion.section
+      id="contact"
       className="contact"
       initial="hidden"
       whileInView="visible"
@@ -159,11 +198,23 @@ const Contact = () => {
             type="submit"
             className="submit-button"
             variants={itemVariants}
-            whileHover={{ letterSpacing: '0.1em' }}
-            whileTap={{ scale: 0.98 }}
+            disabled={isSubmitting}
+            whileHover={!isSubmitting ? { letterSpacing: '0.1em' } : {}}
+            whileTap={!isSubmitting ? { scale: 0.98 } : {}}
           >
-            TRANSMIT →
+            {isSubmitting ? 'TRANSMITTING...' : 'TRANSMIT →'}
           </motion.button>
+
+          {submitError && (
+             <motion.div
+               className="form-error"
+               initial={{ opacity: 0, y: 10 }}
+               animate={{ opacity: 1, y: 0 }}
+               exit={{ opacity: 0, y: -10 }}
+             >
+               {submitError}
+             </motion.div>
+          )}
 
           {submitted && (
             <motion.div

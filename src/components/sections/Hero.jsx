@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaTrophy } from 'react-icons/fa';
+import { SiLeetcode, SiGmail, SiHackerrank, SiDevpost } from 'react-icons/si';
 import { motion } from 'framer-motion';
 import SystemLabel from '../ui/SystemLabel';
 import SpeedLines from '../ui/SpeedLines';
@@ -56,6 +57,31 @@ const Hero = () => {
       icon: FaLinkedin,
       label: 'LinkedIn',
       url: 'https://www.linkedin.com/in/manvitha-dungi-8a8040211/',
+    },
+    {
+      icon: SiLeetcode,
+      label: 'LeetCode',
+      url: 'https://leetcode.com/u/manvitha_dungi/',
+    },
+    {
+      icon: SiDevpost,
+      label: 'Devpost',
+      url: 'https://devpost.com/manvitha3626',
+    },
+    {
+      icon: SiHackerrank,
+      label: 'HackerRank',
+      url: 'https://www.hackerrank.com/profile/manvitha3626',
+    },
+    {
+      icon: FaTrophy,
+      label: 'Unstop',
+      url: 'https://unstop.com/u/manvidun37992',
+    },
+    {
+      icon: SiGmail,
+      label: 'Email',
+      url: '#contact',
     },
   ];
 
@@ -126,8 +152,8 @@ const Hero = () => {
               <a
                 key={social.label}
                 href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={social.url.startsWith('#') ? undefined : "_blank"}
+                rel={social.url.startsWith('#') ? undefined : "noopener noreferrer"}
                 className="social-link"
                 title={social.label}
               >
