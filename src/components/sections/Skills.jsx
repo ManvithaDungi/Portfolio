@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import * as SiIcons from 'react-icons/si';
 import SystemLabel from '../ui/SystemLabel';
 import MangaPanel from '../ui/MangaPanel';
 import { skillsData } from '../../data/skills';
@@ -83,12 +84,19 @@ const Skills = () => {
                   &gt; {category.category}
                 </div>
                 <div className="category-skills">
-                  {category.skills.map((skill) => (
-                    <div key={skill} className="skill-item">
-                      <span className="skill-prefix">{"// "}</span>
-                      <span className="skill-name">{skill}</span>
-                    </div>
-                  ))}
+                  {category.skills.map((skill) => {
+                    const skillName = typeof skill === 'string' ? skill : skill.name;
+                    const iconName = typeof skill === 'string' ? null : skill.icon;
+                    const IconComponent = iconName && SiIcons[iconName] ? SiIcons[iconName] : null;
+                    
+                    return (
+                      <div key={skillName} className="skill-item">
+                        {IconComponent && <IconComponent className="skill-icon" />}
+                        <span className="skill-prefix">{"// "}</span>
+                        <span className="skill-name">{skillName}</span>
+                      </div>
+                    );
+                  })}
                 </div>
               </MangaPanel>
             </motion.div>

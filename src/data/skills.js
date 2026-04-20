@@ -1,38 +1,64 @@
 export const skillsData = [
   {
     category: 'PROGRAMMING',
-    skills: ['Python', 'C++', 'Java', 'JavaScript', 'Solidity'],
+    skills: [
+      { name: 'Python', icon: 'SiPython' },
+      { name: 'C++', icon: 'SiCplusplus' },
+      { name: 'Java', icon: 'SiJava' },
+      { name: 'JavaScript', icon: 'SiJavascript' },
+      { name: 'Solidity', icon: 'SiSolidity' },
+      { name: 'Haskell', icon: 'SiHaskell' },
+    ],
   },
   {
     category: 'FRONTEND',
-    skills: ['React', 'React Hooks', 'React Router', 'Vite', 'CSS3', 'Framer Motion', 'Material UI'],
+    skills: [
+      { name: 'React', icon: 'SiReact' },
+      { name: 'Angular', icon: 'SiAngular' },
+      { name: 'HTML5', icon: 'SiHtml5' },
+      { name: 'CSS3', icon: 'SiCss3' },
+    ],
   },
   {
     category: 'BACKEND',
-    skills: ['Node.js', 'Express.js', 'Django', 'REST APIs', 'Socket.io', 'JWT'],
+    skills: [
+      { name: 'Node.js', icon: 'SiNodedotjs' },
+      { name: 'Express.js', icon: 'SiExpress' },
+      { name: 'Django', icon: 'SiDjango' },
+      { name: 'REST APIs', icon: 'SiPostman' },
+      { name: 'Socket.io', icon: 'SiSocketdotio' },
+      { name: 'JWT', icon: 'SiJsonwebtokens' },
+      { name: 'Spring Boot', icon: 'SiSpringboot' },
+      { name: 'Maven', icon: 'SiApachemaven' },
+      { name: 'Redis', icon: 'SiRedis' },
+    ],
   },
   {
     category: 'DATABASES',
-    skills: ['MongoDB', 'PostgreSQL', 'Firebase'],
-  },
-  {
-    category: 'EMBEDDED SYSTEMS',
-    skills: ['STM32F4 Series', 'Arduino', 'C++ Firmware', 'ADC', 'I2C', 'UART', 'GPIO', 'Sensors'],
-  },
-  {
-    category: 'ROBOTICS & AUTONOMY',
-    skills: ['ROS2', 'Gazebo', 'PX4 Autopilot', 'MAVSDK', 'Drone Control', 'GPS/IMU'],
-  },
-  {
-    category: 'SECURITY & CRYPTOGRAPHY',
-    skills: ['RSA', 'AES-256', 'SHA-256', 'HMAC', 'End-to-End Encryption', 'Multi-Factor Auth'],
-  },
-  {
-    category: 'TOOLS & PLATFORMS',
-    skills: ['Git', 'GitHub', 'VS Code', 'Postman', 'Keil uVision', 'STM32CubeIDE', 'LaTeX'],
+    skills: [
+      { name: 'MongoDB', icon: 'SiMongodb' },
+      { name: 'PostgreSQL', icon: 'SiPostgresql' },
+      { name: 'Firebase', icon: 'SiFirebase' },
+    ],
   },
   {
     category: 'SPECIALIZED',
-    skills: ['AI/ML Integration', 'Blockchain Smart Contracts', 'HIPAA Compliance', 'GDPR Compliance', 'Web3.py', 'LangGraph'],
+    skills: [
+      { name: 'ROS2', icon: 'SiRos' },
+      { name: 'Gazebo', icon: 'SiGazebo' },
+      { name: 'PX4 Autopilot', icon: 'SiDrone' },
+      { name: 'STM32F404', icon: 'SiStm32' },
+      { name: 'MATLAB', icon: 'SiMatlab' },
+    ],
+  },
+  {
+    category: 'TOOLS & PLATFORMS',
+    skills: [
+      { name: 'GitHub', icon: 'SiGithub' },
+      { name: 'VS Code', icon: 'SiVisualstudiocode' },
+      { name: 'Postman', icon: 'SiPostman' },
+      { name: 'Keil uVision', icon: 'SiArm' },
+      { name: 'Docker', icon: 'SiDocker' },
+    ],
   },
 ];
