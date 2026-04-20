@@ -148,7 +148,7 @@
   bottom: 0;
   background-color: var(--color-bg);
   z-index: 99;
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
